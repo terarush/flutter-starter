@@ -1,6 +1,8 @@
 import 'package:material_ui/material_ui.dart';
-import 'core/theme/app_theme.dart';
-import 'features/welcome/presentation/welcome_screen.dart';
+import 'config/pages.dart';
+import 'config/routes.dart';
+import 'config/themes.dart';
+import 'modules/features/welcome/controllers/welcome_controller.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,17 +17,23 @@ class FlutterStarterApp extends StatefulWidget {
 }
 
 class _FlutterStarterAppState extends State<FlutterStarterApp> {
-  ThemeMode _themeMode = ThemeMode.system;
+  final WelcomeController _welcomeController = WelcomeController();
 
-  void _toggleTheme() {
-    setState(() {
-      final isDark = _themeMode == ThemeMode.dark ||
-          (_themeMode == ThemeMode.system &&
-              WidgetsBinding.instance.platformDispatcher.platformBrightness ==
-                  Brightness.dark);
+  @override
+  void initState() {
+    super.initState();
+    _welcomeController.addListener(_onControllerUpdate);
+  }
 
-      _themeMode = isDark ? ThemeMode.light : ThemeMode.dark;
-    });
+  @override
+  void dispose() {
+    _welcomeController.removeListener(_onControllerUpdate);
+    _welcomeController.dispose();
+    super.dispose();
+  }
+
+  void _onControllerUpdate() {
+    setState(() {});
   }
 
   @override
@@ -35,16 +43,10 @@ class _FlutterStarterAppState extends State<FlutterStarterApp> {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: _themeMode,
-      home: Builder(
-        builder: (context) {
-          final isDark = Theme.of(context).brightness == Brightness.dark;
-          return WelcomeScreen(
-            onToggleTheme: _toggleTheme,
-            isDarkMode: isDark,
-          );
-        },
-      ),
+      themeMode: _welcomeController.themeMode,
+      initialRoute: RouteName.root,
+      onGenerateRoute: (settings) =>
+          AppPages.onGenerateRoute(settings, _welcomeController),
     );
   }
 }

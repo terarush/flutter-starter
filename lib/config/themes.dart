@@ -1,58 +1,45 @@
 import 'package:material_ui/material_ui.dart';
-import 'app_colors.dart';
+import 'package:flutter_starter/constant/common/colors.dart';
+import 'package:flutter_starter/constant/common/text_styles.dart';
 
 abstract final class AppTheme {
   static ThemeData get lightTheme {
     final colorScheme = ColorScheme(
       brightness: Brightness.light,
-      primary: AppColors.lightPrimary,
-      onPrimary: AppColors.lightPrimaryForeground,
-      secondary: AppColors.lightSecondary,
-      onSecondary: AppColors.lightSecondaryForeground,
+      primary: AppColors.primary,
+      onPrimary: AppColors.primaryForeground,
+      secondary: AppColors.secondary,
+      onSecondary: AppColors.secondaryForeground,
       error: AppColors.destructive,
-      onError: AppColors.destructiveForeground,
-      surface: AppColors.lightBackground,
-      onSurface: AppColors.lightForeground,
-      outline: AppColors.lightBorder,
+      onError: Colors.white,
+      surface: AppColors.background,
+      onSurface: AppColors.foreground,
+      outline: AppColors.border,
     );
 
     return ThemeData(
       useMaterial3: true,
       brightness: Brightness.light,
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: AppColors.lightSurface,
+      scaffoldBackgroundColor: AppColors.surface,
       cardTheme: CardThemeData(
-        color: AppColors.lightCard,
+        color: AppColors.card,
         elevation: 0,
         shape: RoundedRectangleBorder(
-          side: const BorderSide(color: AppColors.lightBorder),
+          side: const BorderSide(color: AppColors.border),
           borderRadius: BorderRadius.circular(12),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColors.lightPrimary,
-          foregroundColor: AppColors.lightPrimaryForeground,
+          backgroundColor: AppColors.primary,
+          foregroundColor: AppColors.primaryForeground,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          textStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.2,
-          ),
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.lightForeground,
-          side: const BorderSide(color: AppColors.lightBorder),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          textStyle: CustomTypography.button,
         ),
       ),
       appBarTheme: const AppBarTheme(
@@ -72,7 +59,7 @@ abstract final class AppTheme {
       secondary: AppColors.darkSecondary,
       onSecondary: AppColors.darkSecondaryForeground,
       error: AppColors.destructive,
-      onError: AppColors.destructiveForeground,
+      onError: Colors.white,
       surface: AppColors.darkBackground,
       onSurface: AppColors.darkForeground,
       outline: AppColors.darkBorder,
@@ -100,21 +87,7 @@ abstract final class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
-          textStyle: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
-            letterSpacing: 0.2,
-          ),
-        ),
-      ),
-      outlinedButtonTheme: OutlinedButtonThemeData(
-        style: OutlinedButton.styleFrom(
-          foregroundColor: AppColors.darkForeground,
-          side: const BorderSide(color: AppColors.darkBorder),
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          textStyle: CustomTypography.button,
         ),
       ),
       appBarTheme: const AppBarTheme(
